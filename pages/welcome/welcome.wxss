@@ -19,7 +19,7 @@ page {
 }
 .moto-container {
     border:1rpx  solid #405f80;
-    widows: 200rpx;
+    width: 200rpx;
     height: 80rpx;
     border-radius: 5px;
     text-align: center;

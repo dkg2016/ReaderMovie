@@ -1,16 +1,22 @@
+
+<!--模板文件-->
+
 <template name="postItem">
   <view class="post-container">
+    <!--作者信息-->
     <view class="post-author-data">
       <image class="post-author" src="{{avatar}}"></image>
       <text class="post-date">{{date}}</text>
     </view>
+    <!--简介-->
     <text class="post-title">{{title}}</text>
     <image class="post-image" src="{{imgSrc}}"></image>
     <text class="post-content">{{content}}</text>
+    <!--阅读与收藏-->
     <view class="post-like">
-      <image class="post-like-image" src="../../images/icon/chat.png"></image>
+      <image class="post-like-image" src="/images/icon/chat.png"></image>
       <text class="post-like-font">{{reading}}</text>
-      <image class="post-like-image" src="../../images/icon/view.png"></image>
+      <image class="post-like-image" src="/images/icon/view.png"></image>
       <text class="post-like-font">{{collection}}</text>
     </view>
   </view>
