@@ -1,7 +1,7 @@
 Page({
     onTap:function(event){
         wx.redirectTo({
-          url: '../post/post',
+          url: '/pages/post/post',
         })
     }
 })
