@@ -10,7 +10,7 @@ function convertToStarsArray(stars) {
     }
     return array;
 }
-
+//请求数据函数
 function http(url,callBack) {
     wx.request({
         url: url,

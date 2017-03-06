@@ -3,19 +3,18 @@ var app = getApp();
 var util = require('../../../utils/utils.js');
 Page({
   data: {
-    movies:{},
-    requestUrl:"",
+    movies: {},
+    requestUrl: "",  //请求数据地址
     totalCount: 0,
-    isEmpty:true,
+    isEmpty: true,
   },
   onLoad: function (options) {
-    var category = options.category;
-    console.log(category);
-    wx.setNavigationBarTitle({
+    var category = options.category; //获取到的页面
+    wx.setNavigationBarTitle({  //设置页面标题
       title: category,
     });
     var dataUrl = "";
-    switch (category) {
+    switch (category) {  //根据页面标题，确定请求数据地址
       case "正在热映":
         dataUrl = app.globalData.doubanBase + "/v2/movie/in_theaters";
         break;
@@ -27,17 +26,29 @@ Page({
         break;
     }
     this.setData({
-      requestUrl:dataUrl
+      requestUrl: dataUrl //确定请求地址
     })
-    util.http(dataUrl, this.processDoubanData);
+    util.http(dataUrl, this.processDoubanData); //调用函数，处理数据
   },
-  
-  onScrollLower:function(){
-      console.log("加载更多");
-      var nextUrl = this.data.requestUrl + "?start="+this.data.totalCount + "&count=20";
-      util.http(nextUrl, this.processDoubanData);
+  //触底刷新新数据，“加载更多”
+  onScrollLower: function () {
+    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
+    util.http(nextUrl, this.processDoubanData);
+    //loading 开始
+    wx.showNavigationBarLoading()
+  },
+  //下拉刷新
+  onPullDownRefresh:function(event){
+      var refreshUrl = this.data.requestUrl + "?star=0&count=20";
+      this.setData({
+        movies:{},
+        isEmpty:true
+      })
+      util.http(refreshUrl,this.processDoubanData);
+      wx.stopPullDownRefresh();
   },
 
+  //如果要绑定新加载的数据，需要同旧有的数据合并在一起
   processDoubanData: function (moviesDouban) {
     var movies = [];
     for (var idx in moviesDouban.subjects) {
@@ -56,14 +67,25 @@ Page({
       movies.push(temp)
     }
     var totalMovies = {}
-    this.setData({
-      totalCount:this.data.totalCount+20
-    });
-    if(!this.data.isEmpty){
-      
+
+    //如果数据非空，链接新旧数据
+    if (!this.data.isEmpty) {
+      totalMovies = this.data.movies.concat(movies);
+    } else {
+      totalMovies = movies;
+      this.setData({
+        isEmpty: false
+      })
     }
     this.setData({
-      movies:movies
+      movies: totalMovies
     });
+    this.setData({
+      totalCount: this.data.totalCount + 2
+    });
+
+    //loading 结束
+    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh()
   }
 })
