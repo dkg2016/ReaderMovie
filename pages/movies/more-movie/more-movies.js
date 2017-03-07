@@ -42,7 +42,8 @@ Page({
       var refreshUrl = this.data.requestUrl + "?star=0&count=20";
       this.setData({
         movies:{},
-        isEmpty:true
+        isEmpty:true,
+        totalCount:0
       })
       util.http(refreshUrl,this.processDoubanData);
       wx.stopPullDownRefresh();

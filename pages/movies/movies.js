@@ -5,6 +5,9 @@ Page({
         inTheaters:{},
         comingSoon:{},
         top250:{},
+        searchResult:{},
+        containerShow:true,
+        searchPanelShow:false
     },
 
     onLoad:function(event){
@@ -16,13 +19,21 @@ Page({
         this.getMovieListData(comingSoonUrl,"comingSoon","即将上映");
         this.getMovieListData(top250Url,"top250","豆瓣Top250");
     },
-
+    //点击“更多”
     onMoreTap:function(event) {
         var category = event.currentTarget.dataset.category;
         wx.navigateTo({
           url: 'more-movie/more-movies?category='+ category
         })
     },
+    //点击电影页面
+    onMovieTap:function(event){
+        var movieId = event.currentTarget.dataset.movieid;
+        wx.navigateTo({ 
+          url: 'movie-detail/movie-detail?id=' + movieId
+        })
+    },
+
 
     getMovieListData:function(url,settedKey,categoryTitle){
         var that = this;
@@ -36,6 +47,28 @@ Page({
             that.processDoubanData(res.data,settedKey,categoryTitle)
           }
         })
+    },
+    //关闭搜索页面
+    onCancelImgTap:function(event) {
+        this.setData({
+            containerShow:true,
+            searchPanelShow:false,
+            searchResult:{}
+        })
+    },
+    //点击搜索
+    onBindFocus:function(event){
+        this.setData({
+            containerShow:false,
+            searchPanelShow:true
+        })
+    },
+    //开始搜索
+    onBindConfirm:function(event){
+        var text = event.detail.value;
+        var searchUrl =app.globalData.doubanBase + "/v2/movie/search?q=" +text;
+        this.getMovieListData(searchUrl,"searchResult","");
+        console.log(text)
     },
 
     processDoubanData:function(moviesDouban,settedKey,categoryTitle) {

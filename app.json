@@ -4,7 +4,8 @@
     "pages/post/post",
     "pages/post/post-detail/post-detail",
     "pages/movies/movies",
-    "pages/movies/more-movie/more-movies"
+    "pages/movies/more-movie/more-movies",
+    "pages/movies/movie-detail/movie-detail"
   ],
   "window": {
     "navigationBarBackgroundColor": "#405f80"
@@ -15,14 +16,14 @@
       {
         "pagePath": "pages/post/post",
         "text": "阅读",
-        "iconPath":"/images/tab/yuedu.png",
-        "selectedIconPath": "/images/tab/yuedu_hl.png"
+        "iconPath":"images/tab/yuedu.png",
+        "selectedIconPath": "images/tab/yuedu_hl.png"
       },
       {
         "pagePath": "pages/movies/movies",
         "text": "电影",
-        "iconPath":"/images/tab/dianying.png",
-        "selectedIconPath": "/images/tab/dianying_hl.png"
+        "iconPath":"images/tab/dianying.png",
+        "selectedIconPath": "images/tab/dianying_hl.png"
       }
     ]
   }
