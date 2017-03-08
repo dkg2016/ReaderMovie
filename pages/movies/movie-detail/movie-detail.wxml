@@ -11,12 +11,12 @@
             <text class="plain-font">条评论</text>
         </view>
     </view>
-    <image class="movie-img" src="{{movie.movieImg}}" data-src="{{movie.novieImg}}" catchtap="viewMoviePostImg"></image>
+    <image class="movie-img" src="{{movie.movieImg}}" data-src="{{movie.movieImg}}" catchtap="viewMoviePostImg"></image>
     <view class="summary">
         <view class="original-title">
             <text>{{movie.originalTitle}}</text>
         </view>
-        <view clss="flex-row">
+        <view class="flex-row">
             <text class="mark">评分</text>
             <template is="starsTemplate" data="{{stars:movie.stars,score:movie.score}}" />
         </view>
@@ -35,12 +35,12 @@
     </view>
     <view class="hr"></view>
     <view class="synopsis">
-        <text>剧情简介</text>
+        <text class="synopsis-font">剧情简介</text>
         <text class="summary-content">{{movie.summary}}</text>
     </view>
     <view class="hr"></view>
     <view class="cast">
-        <text style="color: #999;margin-bottom: 40rpx;">影人</text>
+        <text class="text-font">影人</text>
         <scroll-view class="cast-imgs" scroll-x="true" style="width:100%">
             <block wx:for="{{movie.castsInfo}}" wx:for-item="item">
                 <view class="cast-container">

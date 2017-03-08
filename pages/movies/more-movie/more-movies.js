@@ -30,23 +30,32 @@ Page({
     })
     util.http(dataUrl, this.processDoubanData); //调用函数，处理数据
   },
+
+  //点击电影看详情
+  onMovieTap: function (event) {
+    var movieId = event.currentTarget.dataset.movieid;
+    wx.navigateTo({
+      url: '../movie-detail/movie-detail?id=' + movieId
+    })
+  },
+
   //触底刷新新数据，“加载更多”
-  onScrollLower: function () {
+  onReachBottom: function () {
     var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
     util.http(nextUrl, this.processDoubanData);
     //loading 开始
     wx.showNavigationBarLoading()
   },
   //下拉刷新
-  onPullDownRefresh:function(event){
-      var refreshUrl = this.data.requestUrl + "?star=0&count=20";
-      this.setData({
-        movies:{},
-        isEmpty:true,
-        totalCount:0
-      })
-      util.http(refreshUrl,this.processDoubanData);
-      wx.stopPullDownRefresh();
+  onPullDownRefresh: function (event) {
+    var refreshUrl = this.data.requestUrl + "?star=0&count=20";
+    this.setData({
+      movies: {},
+      isEmpty: true,
+      totalCount: 0
+    })
+    util.http(refreshUrl, this.processDoubanData);
+    wx.stopPullDownRefresh();
   },
 
   //如果要绑定新加载的数据，需要同旧有的数据合并在一起
@@ -82,7 +91,7 @@ Page({
       movies: totalMovies
     });
     this.setData({
-      totalCount: this.data.totalCount + 2
+      totalCount: this.data.totalCount + 20
     });
 
     //loading 结束

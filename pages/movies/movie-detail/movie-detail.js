@@ -1,26 +1,30 @@
 var app = getApp();
 var util = require('../../../utils/utils.js');
 Page({
-  data:{
-    movie:{}
+  data: {
+    movie: {}
   },
-  onLoad:function(options){
+
+
+  onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var movieId = options.id;
     var url = app.globalData.doubanBase + "/v2/movie/subject/" + movieId;
     util.http(url,this.processDoubanData)
   },
-  processDoubanData:function(data){
-    if(!data){
+
+
+  processDoubanData: function (data) {
+    if (!data) {
       return;
     }
     var director = {
-      avatar:"",
-      name:"", 
-      id:""
+      avatar: "",
+      name: "",
+      id: ""
     }
-    if(data.directors[0] != null) {
-      if(data.directors[0].avatars != null) {
+    if (data.directors[0] != null) {
+      if (data.directors[0].avatars != null) {
         director.avatar = data.directors[0].avatars.large
       }
       director.name = data.directors[0].name;
@@ -37,14 +41,21 @@ Page({
       generes: data.genres.join("、"),
       stars: util.convertToStarsArray(data.rating.stars),
       score: data.rating.average,
-      director:director,
+      director: director,
       casts: util.convertToCastString(data.casts),
-      castsInfo:util.convertToCastInfos(data.casts),
-      summary:data.summary
+      castsInfo: util.convertToCastInfos(data.casts),
+      summary: data.summary
     }
     console.log(movie)
     this.setData({
-      movie:movie
+      movie: movie
     })
-  }
+  },
+  viewMoviePostImg: function (e) {
+    var src = e.currentTarget.dataset.src;
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
+  },
 })
