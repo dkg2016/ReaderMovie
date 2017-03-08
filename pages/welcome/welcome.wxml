@@ -1,6 +1,6 @@
 <view class="container">                  
     <image class="user-avatar" src="/images/avatar/4.png"></image>
-    <text class="user-name">Hello, 杜凯歌</text>
+    <text class="user-name">Hello, World</text>
     <view class="moto-container" bindtap="onTap">
         <text class="moto">开启小程序之旅</text>
     </view>

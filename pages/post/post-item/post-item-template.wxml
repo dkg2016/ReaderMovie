@@ -1,8 +1,8 @@
-
+<!--文章列表-->
 <!--模板文件-->
 
 <template name="postItem">
-  <view class="post-container">
+  <view class="post-container">  
     <!--作者信息-->
     <view class="post-author-data">
       <image class="post-author" src="{{avatar}}"></image>

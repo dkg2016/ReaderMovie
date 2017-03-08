@@ -2,45 +2,63 @@ var postsData = require('../../../data/posts-data.js')
 var app = getApp();
 Page({
     data: {
+
+        // 默认音乐播放状态为false
         isPlayingMusic: false
     },
 
     onLoad: function (option) {
+        
+        // 获得上一个页面的单击事件传递过来的参数
         var postId = option.id;
+
         this.setData({
             currentPostId: postId
         })
+
+        // 获得对应ID的数据
         var postData = postsData.postList[postId];
+
+        // 设置数据
         this.setData({
             postData: postData
         })
-        // 收藏
+
+
+        // 收藏功能
+        // 取得缓存
         var postsCollected = wx.getStorageSync('posts_collected');
-        if (postsCollected) {
-            //如果存在，取对应的值值，并设置给当前data中的collected；
+
+        // 如果缓存存在，取得对应的值，并设置给当前data中的collected；
+        if (postsCollected) {    
             var postCollected = postsCollected[postId];
             this.setData({
                 collected: postCollected
             })
+
+        // 如果不存在，设当前文章收藏为false（默认），建立缓存；
         } else {
-            //如果不存在，设当前文章收藏为false，建立缓存；
             var postsCollected = {};
             postsCollected[postId] = false;
             wx.setStorageSync('posts_collected', postsCollected);
         }
 
-        //音乐播放
-        //获取全局状态，是否是当前页面在播放
+        // 音乐播放功能
+        // 获取全局状态，是否是当前页面在播放
         if (app.globalData.g_isPlayingMusic && app.globalData.g_currentMusicPostId === postId) {
             this.setData({
                 isPlayingMusic: true
             })
         }
+
+        //监听音乐状态
         this.setMusicMonitor();
     },
-    //播放与暂停音乐
+
     setMusicMonitor: function () {
         var that = this;
+
+        //音乐播放状态
         wx.onBackgroundAudioPlay(function () {
             that.setData({
                 isPlayingMusic: true
@@ -49,6 +67,8 @@ Page({
             app.globalData.g_isPlayingMusic = true;
             app.globalData.g_currentMusicPostId = that.data.currentPostId;
         });
+
+        //音乐暂停状态
         wx.onBackgroundAudioPause(function () {
             that.setData({
                 isPlayingMusic: false
@@ -56,6 +76,8 @@ Page({
             app.globalData.g_isPlayingMusic = false;
             app.globalData.g_currentMusicPostId = null;
         });
+
+        //音乐停止状态
         wx.onBackgroundAudioStop(function () {
             that.setData({
                 isPlayingMusic: false
@@ -63,16 +85,19 @@ Page({
             app.globalData.g_isPlayingMusic = false;
             app.globalData.g_currentMusicPostId = null;
         });
-
     },
-    onCollectionTap: function (evebt) {
+
+    //点击收藏按钮
+    onCollectionTap: function (event) {
         var postsCollected = wx.getStorageSync('posts_collected');
         var postCollected = postsCollected[this.data.currentPostId];
+
         //收藏变未收藏，未收藏变收藏
         postCollected = !postCollected;
+
         //更改缓存
         postsCollected[this.data.currentPostId] = postCollected;
-        //this.showModal(postsCollected,postCollected);
+
         this.showToast(postsCollected, postCollected);
         // wx.showToast({
         //     title:postCollected?"收藏成功":"取消收藏成功",
@@ -105,18 +130,24 @@ Page({
     // },
 
     showToast: function (postsCollected, postCollected) {
+
         //更新文章是否收藏的缓存值
         wx.setStorageSync('posts_collected', postsCollected);
+
         //更新数据绑定，从而实现切换图片
         this.setData({
             collected: postCollected
         })
+
+        //发出消息通知
         wx.showToast({
             title: postCollected ? "收藏成功" : "取消收藏成功",
             duration: 1000,
             icon: "success",
         })
     },
+
+    //分享功能
     onShowTap: function (event) {
         var itemList = [
             "分享到微信好友",
@@ -124,6 +155,7 @@ Page({
             "分享到QQ",
             "分享到微博"
         ];
+
         wx.showActionSheet({
             itemList: itemList,
             itemColor: "#405f80",
@@ -137,10 +169,14 @@ Page({
             }
         })
     },
+
+    //点击音乐按钮
     onMusicTap: function () {
         var currentPostId = this.data.currentPostId;
         var postData = postsData.postList[currentPostId];
         var isPlayingMusic = this.data.isPlayingMusic;
+
+        //如果正在播放，暂停；如果正在暂停，开始播放；
         if (isPlayingMusic) {
             wx.pauseBackgroundAudio();
             this.setData({

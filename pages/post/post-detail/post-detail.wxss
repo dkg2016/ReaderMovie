@@ -3,20 +3,27 @@
   flex-direction: column;
 }
 
+/*文章配图*/
 .head-image {
   width: 750rpx;
   height: 460rpx;
 }
+
+/*作者信息栏*/
 .author-data {
     flex-direction: row;
     margin-left: 30rpx;
     margin-top: 20rpx;
 }
+
+/*头像*/
 .avatar {
     height: 64rpx;
     width: 64rpx;
     vertical-align: middle;
 }
+
+/*作者*/
 .author {
     font-size: 30rpx;
     font-weight: 300;
@@ -24,17 +31,23 @@
     vertical-align: middle;
     color: #666;
 }
+
+/*发表于*/
 .const-text {
     font-size: 24rpx;
     color: #999;
     margin-left: 20rpx;
 }
+
+/*日期*/
 .date {
     font-size: 24rpx;
     margin-left: 30rpx;
     vertical-align: middle;
     color: #999;
 }
+
+/*标题*/
 .title {
     margin-left: 40rpx;
     font-size: 36rpx;
@@ -43,21 +56,31 @@
     letter-spacing: 2px;
     color: #4b556c;
 }
+
+/*横线和收藏*/
 .tool {
     margin-top: 20rpx;
 }
+
+/*收藏和分享图标容器*/
 .circle-img {
     float: right;
     margin-right: 40rpx;
     vertical-align: middle;
 }
+
+/*收藏和分享图标大小*/
 .circle-img image {
     width: 90rpx;
     height: 90rpx;
 }
+
+/*分享图标位置*/
 .share-img {
     margin-left: 30rpx;
 }
+
+/*横线*/
 .horizon {
     width: 660rpx;
     height: 1px;
@@ -68,6 +91,8 @@
     margin: 0 auto;
     z-index: -99;
 }
+
+/*详细信息*/
 .detail {
     color: #666;
     margin-left: 30rpx;
@@ -76,6 +101,8 @@
     line-height: 44rpx;
     letter-spacing: 2px;
 }
+
+/*音乐图标*/
 .audio {
     width: 102rpx;
     height: 110rpx;

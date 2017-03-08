@@ -1,4 +1,4 @@
-@import "post-item/post-item-template.wxss";
+@import "post-item/post-item-template.wxss";  /*引入模板的css文件*/
 swiper {
     width: 100%;
     height: 600rpx;
