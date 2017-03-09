@@ -1,3 +1,4 @@
+/*引入模板的CSS文件*/
 @import "../stars/stars-template.wxss";
 
 .movie-container {

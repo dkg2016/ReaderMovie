@@ -1,7 +1,10 @@
+<!--引入模板文件-->
 <import src="../movie/movie-template.wxml" />
+
 <template name="movieListTemplate">
   <view class="movie-list-container">
     <view class="inner-container">
+      <!--正在热映和更多-->
       <view class="movie-head">
         <text class="slogan">{{categoryTitle}}</text>
         <view catchtap="onMoreTap" class="more" data-category="{{categoryTitle}}">
@@ -9,6 +12,7 @@
           <image class="more-img" src="/images/icon/arrow-right.png"></image>
         </view>
       </view>
+
       <view class="movies-container">
         <block wx:for="{{movies}}" wx:for-item="movie">
           <template is="movieTemplate" data="{{...movie}}"></template>

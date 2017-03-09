@@ -1,3 +1,5 @@
+
+// 电影星星评价
 function convertToStarsArray(stars) {
     var num = stars.toString().substring(0, 1);
     var array = [];
@@ -10,13 +12,15 @@ function convertToStarsArray(stars) {
     }
     return array;
 }
+
+
 //请求数据函数
 function http(url,callBack) {
     wx.request({
         url: url,
         method: 'GET',
         header: {
-            "Content-Type": "Json"
+            "Content-Type": "json"
         },
         success: function (res) {
             callBack(res.data);
@@ -24,6 +28,8 @@ function http(url,callBack) {
     })
 }
 
+
+//演员表
 function convertToCastString(casts) {
     var castsjoin = "";
     for(var idx in casts){
@@ -32,6 +38,7 @@ function convertToCastString(casts) {
     return castsjoin.substring(0,castsjoin.length-2);
 }
 
+//演员图片和名字
 function convertToCastInfos(casts) {
     var castsArray = []
     for(var idx in casts){

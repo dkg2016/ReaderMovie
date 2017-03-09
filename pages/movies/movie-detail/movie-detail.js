@@ -4,8 +4,6 @@ Page({
   data: {
     movie: {}
   },
-
-
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     var movieId = options.id;
@@ -30,6 +28,8 @@ Page({
       director.name = data.directors[0].name;
       director.id = data.directors[0].id;
     }
+
+    //数据处理
     var movie = {
       movieImg: data.images ? data.images.large : "",
       country: data.countries[0],

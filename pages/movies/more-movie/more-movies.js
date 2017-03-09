@@ -41,14 +41,14 @@ Page({
 
   //触底刷新新数据，“加载更多”
   onReachBottom: function () {
-    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=20";
+    var nextUrl = this.data.requestUrl + "?start=" + this.data.totalCount + "&count=18";
     util.http(nextUrl, this.processDoubanData);
     //loading 开始
     wx.showNavigationBarLoading()
   },
   //下拉刷新
   onPullDownRefresh: function (event) {
-    var refreshUrl = this.data.requestUrl + "?star=0&count=20";
+    var refreshUrl = this.data.requestUrl + "?star=0&count=18";
     this.setData({
       movies: {},
       isEmpty: true,
@@ -91,7 +91,7 @@ Page({
       movies: totalMovies
     });
     this.setData({
-      totalCount: this.data.totalCount + 20
+      totalCount: this.data.totalCount + 18
     });
 
     //loading 结束

@@ -1,3 +1,4 @@
+<!--引入模板文件-->
 <import src="../stars/stars-template.wxml" />
 <template name="movieTemplate">
     <view class="movie-container" catchtap="onMovieTap" data-movieId="{{movieId}}">
